@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-
-List<String> imageUrls = [
-  'assets/images/learning.jpg',
-  'assets/images/learning2.jpg',
-  'assets/images/learning3.jpg',
-];
-final List<Map<String, dynamic>> jsonData = [
-  {
-    "title": "Experiments",
-    "image": "assets/images/Experiments.png",
-  },
-  {
-    "title": "Algorithms",
-    "image": "assets/images/Algorithms.png",
-  },
-  // Add more JSON items as needed
-];
+import 'package:new_project/components/bottomNavigationBar.dart';
+import 'package:new_project/components/carousal.dart';
+import 'package:new_project/components/explore.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,67 +27,46 @@ class _HomePageState extends State<HomePage> {
         margin: EdgeInsets.only(top: 40.0),
         child: Column(
           children: [
-            CarouselSlider(
-              items: imageUrls.map((imageUrl) {
-                return Container(
-                  child: Image.asset(
-                    imageUrl,
-                    fit: BoxFit.cover,
+            //Carousal
+            carousalSlider(),
+            //Explore Text
+            Container(
+              margin: EdgeInsets.only(top: 46.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.explore, // Replace with the icon you want
+                          color: Colors.white.withOpacity(0.7),
+                          size: 36, // Adjust the size as needed
+                        ),
+                      ),
+                      Text(
+                        "Explore", // Your desired text here
+                        style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white.withOpacity(0.7)),
+                      ),
+                    ],
                   ),
-                );
-              }).toList(),
-              options: CarouselOptions(
-                height: 300, // Set the height of the slider
-                enlargeCenterPage: true, // Make the center image larger
-                autoPlay: true, // Enable auto-play
-                autoPlayInterval:
-                    Duration(seconds: 4), // Set auto-play interval
+                  Text(
+                    "Choose the world you want", // Your desired subtitle text here
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white.withOpacity(0.7),
+                        letterSpacing: 1.0),
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: jsonData.length,
-                itemBuilder: (context, index) {
-                  final item = jsonData[index];
-
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 5, // Adjust the elevation as needed
-                      shadowColor: Colors.blue,
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20.0),
-                              topRight: Radius.circular(20.0),
-                            ),
-                            child: Image.asset(
-                              item["image"],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(16.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              item["title"],
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            //Cards
+            Explore(),
+            bottomNavigationBar()
           ],
         ),
       ),

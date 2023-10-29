@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_project/views/homepage.dart';
+import 'package:new_project/views/homePage.dart';
 
 class Intro extends StatelessWidget {
   const Intro({
