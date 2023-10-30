@@ -24,7 +24,6 @@ class Explore extends StatelessWidget {
         itemCount: jsonData.length,
         itemBuilder: (context, index) {
           final item = jsonData[index];
-
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: Card(
